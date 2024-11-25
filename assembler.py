@@ -56,10 +56,13 @@ def generate_program(filename):
 	in_data = True
 	file = open(filename, "r")
 	lines = file.readlines()
-	instruction_num = len(lines) - lines.index("section .text:\n") - 1
+	lines = [line.rstrip().lstrip() for line in lines]
+	instruction_num = len(lines) - lines.index("section .text:\n") - lines.count("") - 1
 	print(instruction_num)
 	for line in lines:
-		line = line.rstrip()
+		line = line.rstrip().lstrip()
+		if line = "":
+			continue
 		if line == "section .data:":
 			continue
 		elif line == "section .text:":
